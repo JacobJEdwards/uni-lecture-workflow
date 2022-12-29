@@ -1,0 +1,38 @@
+\markdownRendererDocumentBegin
+\markdownRendererJekyllDataBegin\markdownRendererJekyllDataMappingBegin{null}{2}\markdownRendererJekyllDataString{_date}{20-28}\markdownRendererJekyllDataString{_title}{test}\markdownRendererJekyllDataMappingEnd\markdownRendererJekyllDataEnd\markdownRendererInterblockSeparator
+{}\markdownRendererHeadingOne{University Scripting Workflow}\markdownRendererInterblockSeparator
+{}I am going to create a semi-automated lecture and file organiser. \markdownRendererBackslash{} \markdownRendererBackslash{} This will be used to generate my file structure for each module, and generate a \markdownRendererStrongEmphasis{master.tex} file that will include the two most recent lecture notes. \markdownRendererBackslash{} \markdownRendererBackslash{} Additionally, there will be an option to generate a complete pdf of all my lecture notes for one module. \markdownRendererBackslash{} \markdownRendererBackslash{} Finally, it will symlink the current or most recent module to the current course directory. \markdownRendererBackslash{} \markdownRendererBackslash{} Python and possibly shell script will be used for this process. \markdownRendererBackslash{} \markdownRendererBackslash{} I may need to use cron to schedule events.\markdownRendererInterblockSeparator
+{}\markdownRendererHeadingTwo{Processes:}\markdownRendererInterblockSeparator
+{}\markdownRendererUlBeginTight
+\markdownRendererUlItem Add lectures, any directories, compiled lectures, master.tex and preamble.tex to each module directory.\markdownRendererUlItemEnd 
+\markdownRendererUlItem Change output directory of compiled tex docs.\markdownRendererUlItemEnd 
+\markdownRendererUlItem Update each master.tex with the two most recent lecture notes.\markdownRendererUlItemEnd 
+\markdownRendererUlItem Option to compile master.tex with all the lecture notes.\markdownRendererUlItemEnd 
+\markdownRendererUlItem Update current module with the current module for ease of access - look into calendar API or use the day.\markdownRendererUlItemEnd 
+\markdownRendererUlItem Change working path based on date.\markdownRendererUlItemEnd 
+\markdownRendererUlItem Automatically symlink year long courses from semesters into year long directory.\markdownRendererUlItemEnd 
+\markdownRendererUlEndTight \markdownRendererInterblockSeparator
+{}\markdownRendererHeadingTwo{TODO}\markdownRendererInterblockSeparator
+{}\markdownRendererUlBeginTight
+\markdownRendererUlItem Add latex files to directories\markdownRendererUlItemEnd 
+\markdownRendererUlItem Exclude master.tex from year long directory\markdownRendererUlItemEnd 
+\markdownRendererUlItem Add preambles\markdownRendererUlItemEnd 
+\markdownRendererUlItem Add master.tex to lectures\markdownRendererUlItemEnd 
+\markdownRendererUlItem Automatically change master.tex files\markdownRendererUlItemEnd 
+\markdownRendererUlItem Option to compile big master.tex\markdownRendererUlItemEnd 
+\markdownRendererUlItem Change tex output directory\markdownRendererUlItemEnd 
+\markdownRendererUlItem Path.suffix may be useful for dealing with tex files\markdownRendererUlItemEnd 
+\markdownRendererUlItem incorporate tex functions incase i choose to use tex still\markdownRendererUlItemEnd 
+\markdownRendererUlEndTight \markdownRendererInterblockSeparator
+{}\markdownRendererHeadingTwo{Alterations to the original spec}\markdownRendererInterblockSeparator
+{}\markdownRendererUlBeginTight
+\markdownRendererUlItem I may take notes in markdown instead of latex\markdownRendererUlItemEnd 
+\markdownRendererUlItem Use github pages to host these markdown pages, in combination with jekyll\markdownRendererUlItemEnd 
+\markdownRendererUlItem Maybe do current module inside of lectures class\markdownRendererUlItemEnd 
+\markdownRendererUlItem And year long inside lectures class? Or as a module class function\markdownRendererUlItemEnd 
+\markdownRendererUlEndTight \markdownRendererInterblockSeparator
+{}\markdownRendererHeadingOne{Adding markdown notes to LaTeX doc ->}\markdownRendererInterblockSeparator
+{}\markdownRendererBackslash{}usepackage\markdownRendererLeftBrace{}markdown\markdownRendererRightBrace{} \markdownRendererBackslash{}begin\markdownRendererLeftBrace{}document\markdownRendererRightBrace{} \markdownRendererBackslash{}markdownInput\markdownRendererLeftBrace{}lec1.md\markdownRendererRightBrace{} \markdownRendererBackslash{}end\markdownRendererLeftBrace{}document\markdownRendererRightBrace{}\markdownRendererInterblockSeparator
+{}\markdownRendererUlBeginTight
+\markdownRendererUlItem Then run this command: latexmk -cd -lualatex -silent path/master.tex\markdownRendererUlItemEnd 
+\markdownRendererUlEndTight \markdownRendererDocumentEnd
