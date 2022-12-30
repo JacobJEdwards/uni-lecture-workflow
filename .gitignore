@@ -1,4 +1,6 @@
-./__pycache__
+calender/client_secret.json
+token.pickle
+*/__pycache__
 .envrc
 .envrc
 .direnv
