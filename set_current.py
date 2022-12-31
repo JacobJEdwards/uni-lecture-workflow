@@ -10,7 +10,8 @@ def main():
         exit()
 
     summary: str = event['summary']
-    
+    event_type: str = event['description']
+
     for module in Modules():
         if module.code == summary:
             
@@ -19,7 +20,8 @@ def main():
                     exit()
 
             Modules().current = module
-            module.lectures.new_markdown()
+            if 'LECTURES' in event_type:
+                module.lectures.new_markdown()
             break
 
 if __name__ == '__main__':
