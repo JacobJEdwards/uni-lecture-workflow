@@ -26,6 +26,10 @@ def addMaster(module):
                  fr'    % end lectures',
                  r'\end{document}'
             ]
+    master = module.lectures.master_tex
+    if not master.exists():
+        master.touch()
+        master.write_text('\n'.join(lines))
 
 def addYearLongs(module):
     # creates sub module directory and subdirectories

@@ -37,7 +37,9 @@ class Modules(list):
 
     @property 
     def current(self):
-        return Course(CURRENT_COURSE_ROOT.resolve())
+        if not CURRENT_COURSE_SYMLINK.exists():
+            return None
+        return Module(CURRENT_COURSE_SYMLINK.resolve())
 
     @current.setter
     def current(self, module):
