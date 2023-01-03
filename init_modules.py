@@ -1,46 +1,54 @@
 #!/usr/bin/env python
 
+from pathlib import Path
+from config import YEAR_LONG_ROOT, DATE_FORMAT
 from course.modules import Modules
-import os
-from config import YEAR_LONG_ROOT
+from datetime import date
 
 
-def addDirectories(module):
-    os.makedirs(module.path / 'Lectures' / 'figures', exist_ok=True)
-    os.makedirs(module.path / 'Lectures' / 'TeX', exist_ok=True)
-    
-    os.makedirs(module.path / 'Labs', exist_ok=True)
-    os.makedirs(module.path / 'Seminars', exist_ok=True)
-    os.makedirs(module.path / 'Assessments', exist_ok=True)
+def addDirectories(module) -> None:
+    lectures = Path(module.path / "Lectures")
 
-def addMaster(module):
+    Path(lectures / "figures").mkdir(parents=True, exist_ok=True)
+    Path(lectures / "TeX").mkdir(parents=True, exist_ok=True)
+
+    Path(module.path / "Seminars").mkdir(parents=True, exist_ok=True)
+    Path(module.path / "Labs").mkdir(parents=True, exist_ok=True)
+    Path(module.path / "Assessments").mkdir(parents=True, exist_ok=True)
+
+
+def addMaster(module) -> None:
     course_title: str = module.info["title"]
 
-    lines = [r'\documentclass[a4paper]{article}',
-                 r'\input{../../preamble.tex}',
-                 fr'\title{{{course_title}}}',
-                 r'\begin{document}',
-                 r'    \maketitle',
-                 r'    \tableofcontents',
-                 fr'    % start lectures',
-                 fr'    % end lectures',
-                 r'\end{document}'
-            ]
+    lines = [
+        r"\documentclass[a4paper, titlepage]{article}",
+        r"\input{../../../preamble.tex}",
+        rf"\title{{{course_title}}}",
+        rf"\date{{{date.today().strftime(DATE_FORMAT)}}}",
+        r"\begin{document}",
+        r"    \maketitle",
+        r"    \tableofcontents",
+        rf"    % start lectures",
+        rf"    % end lectures",
+        r"\end{document}",
+    ]
     master = module.lectures.master_tex
     if not master.exists():
         master.touch()
-        master.write_text('\n'.join(lines))
-
-def addYearLongs(module):
-    # creates sub module directory and subdirectories
-    os.makedirs(YEAR_LONG_ROOT / module.name / 'Lectures', exist_ok=True)
-    os.makedirs(YEAR_LONG_ROOT / module.name / 'Seminars', exist_ok=True)
-    os.makedirs(YEAR_LONG_ROOT / module.name / 'Labs', exist_ok=True)
+        master.write_text("\n".join(lines))
 
 
+def addYearLongs(module) -> None:
+    # creates submodule directory and subdirectories
+    Path(YEAR_LONG_ROOT / module.name / "Lectures").mkdir(parents=True, exist_ok=True)
+    Path(YEAR_LONG_ROOT / module.name / "Seminars").mkdir(parents=True, exist_ok=True)
+    Path(YEAR_LONG_ROOT / module.name / "Labs").mkdir(parents=True, exist_ok=True)
+    Path(YEAR_LONG_ROOT / module.name / "Assessments").mkdir(
+        parents=True, exist_ok=True
+    )
 
 
-def main():    
+def main() -> None:
     for module in Modules():
         addDirectories(module)
         addMaster(module)
@@ -49,5 +57,5 @@ def main():
             addYearLongs(module)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
