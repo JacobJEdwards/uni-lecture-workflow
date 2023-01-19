@@ -1,20 +1,14 @@
 #!/usr/bin/env python
 
 from pathlib import Path
-from config import YEAR_LONG_ROOT, DATE_FORMAT
+from config import YEAR_LONG_ROOT, DATE_FORMAT, SUBMODULES
 from course.modules import Modules
 from datetime import date
 
 
 def addDirectories(module) -> None:
-    lectures = Path(module.path / "Lectures")
-
-    Path(lectures / "figures").mkdir(parents=True, exist_ok=True)
-    Path(lectures / "TeX").mkdir(parents=True, exist_ok=True)
-
-    Path(module.path / "Seminars").mkdir(parents=True, exist_ok=True)
-    Path(module.path / "Labs").mkdir(parents=True, exist_ok=True)
-    Path(module.path / "Assessments").mkdir(parents=True, exist_ok=True)
+    for sub in SUBMODULES:
+        Path(module.path / sub).mkdir(parents=True, exist_ok=True)
 
 
 def addMaster(module) -> None:

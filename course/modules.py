@@ -13,8 +13,8 @@ class Module:
     def __init__(self, path):
         self.path = path
         self.name = path.stem
-
-        self.info = yaml.full_load((path / "info.yaml").open())
+        with open(path / "info.yaml") as file:
+            self.info = yaml.full_load(file)
         self.code = self.info["code"]
         self._lectures = None
         self.year_long = self.info["semester"] == "Year long"

@@ -22,7 +22,12 @@ def get_calendar_service():
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
+            try:
+                creds.refresh(Request())
+            except:
+                print('Token invalid - remove token.pickle and try again')
+                removePickle()
+
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 CREDENTIALS_FILE, SCOPES)
@@ -34,3 +39,8 @@ def get_calendar_service():
 
     service = build('calendar', 'v3', credentials=creds)
     return service
+
+def removePickle():
+    pickle_file = Path.cwd() / 'token.pickle'
+    if pickle_file.exists():
+        pickle_file.unlink()

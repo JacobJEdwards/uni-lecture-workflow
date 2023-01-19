@@ -54,5 +54,12 @@ I may need to use cron to schedule events.
 \markdownInput{lec1.md}
 \end{document}
 
-- Then run this command:
-latexmk -cd -lualatex -silent path/master.tex
+- Then run this command: 
+latexmk -cd -lualatex -silent -output_directory=./TeX path/master.tex
+
+## TODO now
+- Refactor some of the classes
+- learn about tuples
+- Maybe store submodules in list or tuple ?
+- then iterate
+- set up cron

@@ -33,4 +33,13 @@ COURSES: dict = {
     "CMP-4002B": "ComputingPrinciples",
 }
 
+SUBMODULES: list = [
+    Path("Lectures/Tex"),
+    Path("Lectures/figures"),
+    Path("Seminars"),
+    Path("Assignments"),
+    Path("Labs"),
+    Path("AdditionalWork"),
+]
+
 EVENTS: dict = {"LECTURE": "Lectures", "IT LABORATORY": "Labs", "SEMINAR": "Seminars"}
