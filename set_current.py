@@ -9,18 +9,19 @@ def main() -> None:
     if not event:
         exit()
 
+    print(event)
+
     summary: str = event["summary"]
     event_type: str = event["description"]
 
     for module in Modules():
         if module.code == summary:
-
             if Modules().current is not None:
                 if Modules().current == module:
                     exit()
 
             Modules().current = module
-            if "LECTURES" in event_type:
+            if "LECTURE" in event_type:
                 module.lectures.new_markdown()
             break
 

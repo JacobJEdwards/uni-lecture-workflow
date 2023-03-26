@@ -1,11 +1,10 @@
-#!/usr/bin/env python
-
 from datetime import datetime
 import frontmatter
 from config import DATE_FORMAT
 
 
 def filename2number(filename) -> int:
+    """Converts a filename to a lecture number"""
     return int(
         str(filename)
         .replace(".md", "")
@@ -17,10 +16,13 @@ def filename2number(filename) -> int:
 
 
 def number2filename(number, file_type="md") -> str:
+    """Converts a lecture number to a filename"""
     return f"lec_{number:02d}.{file_type}"
 
 
 class Lecture:
+    """Class used to define a single lecture"""
+
     def __init__(self, path, module):
         self.info = frontmatter.load(path)
 
@@ -39,6 +41,8 @@ class Lecture:
 
 
 class Lectures(list):
+    """Class used to define a list of lectures"""
+
     def __init__(self, module):
         self.module = module
         self.root = module.path / "Lectures"
@@ -90,11 +94,11 @@ class Lectures(list):
         path.touch()
         module = self.module.info["title"]
         lines = [
-            f"---",
-            f"title: ",
+            "---",
+            "title: ",
             f"module: {module}",
             f"date: {datetime.now().strftime(DATE_FORMAT)}",
-            f"---",
+            "---",
         ]
 
         path.write_text("\n".join(lines))

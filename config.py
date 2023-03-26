@@ -16,7 +16,7 @@ CREDENTIALS_FILE: str = str(
 )
 
 ROOT = Path("~/University").expanduser()
-CURRENT_ROOT = ROOT / "Year1/Semester1"
+CURRENT_ROOT = ROOT / "Year1/Semester2"
 
 CURRENT_COURSE_SYMLINK = ROOT / "CurrentModule"
 CURRENT_COURSE_ROOT = CURRENT_COURSE_SYMLINK.resolve()

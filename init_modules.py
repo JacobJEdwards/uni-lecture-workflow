@@ -22,8 +22,8 @@ def addMaster(module) -> None:
         r"\begin{document}",
         r"    \maketitle",
         r"    \tableofcontents",
-        rf"    % start lectures",
-        rf"    % end lectures",
+        r"    % start lectures",
+        r"    % end lectures",
         r"\end{document}",
     ]
     master = module.lectures.master_tex

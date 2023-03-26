@@ -10,17 +10,19 @@ from course.lectures import Lectures
 
 
 class Module:
-    def __init__(self, path):
+    """Defines a module object"""
+
+    def __init__(self, path) -> None:
         self.path = path
         self.name = path.stem
         with open(path / "info.yaml") as file:
             self.info = yaml.full_load(file)
         self.code = self.info["code"]
-        self._lectures = None
+        self._lectures = Lectures(self)
         self.year_long = self.info["semester"] == "Year long"
 
     @property
-    def lectures(self) -> Lectures:
+    def lectures(self) -> Lectures | None:
         if not self._lectures:
             self._lectures = Lectures(self)
         return self._lectures
@@ -32,7 +34,9 @@ class Module:
 
 
 class Modules(list):
-    def __init__(self):
+    """Defines a list of modules"""
+
+    def __init__(self) -> None:
         list.__init__(self, self.read_files())
 
     @staticmethod
@@ -48,7 +52,7 @@ class Modules(list):
         return Module(CURRENT_COURSE_SYMLINK.resolve())
 
     @current.setter
-    def current(self, module) -> None:
+    def current(self, module: Module) -> None:
         if CURRENT_COURSE_SYMLINK.exists():
             CURRENT_COURSE_SYMLINK.unlink()
         CURRENT_COURSE_SYMLINK.symlink_to(module.path)

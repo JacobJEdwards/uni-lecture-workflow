@@ -18,7 +18,7 @@ def main():
                 continue
 
             event_type = sub_module.stem
-            # symlinks each new file in year long module to correct folder in year long directory
+            # symlinks each new file in year long module to correct folder
             for file in sub_module.iterdir():
                 if Path(YEAR_LONG_ROOT / module.name / event_type / file.name).exists():
                     continue
