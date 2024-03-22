@@ -2,16 +2,16 @@
 
 from pathlib import Path
 from config import YEAR_LONG_ROOT, DATE_FORMAT, SUBMODULES
-from course.modules import Modules
+from course.modules import Modules, Module
 from datetime import date
 
 
-def addDirectories(module) -> None:
+def addDirectories(module: Module) -> None:
     for sub in SUBMODULES:
         Path(module.path / sub).mkdir(parents=True, exist_ok=True)
 
 
-def addMaster(module) -> None:
+def addMaster(module: Module) -> None:
     course_title: str = module.info["title"]
 
     lines = [
@@ -32,7 +32,7 @@ def addMaster(module) -> None:
         master.write_text("\n".join(lines))
 
 
-def addYearLongs(module) -> None:
+def addYearLongs(module: Module) -> None:
     # creates submodule directory and subdirectories
     Path(YEAR_LONG_ROOT / module.name / "Lectures").mkdir(parents=True, exist_ok=True)
     Path(YEAR_LONG_ROOT / module.name / "Seminars").mkdir(parents=True, exist_ok=True)
